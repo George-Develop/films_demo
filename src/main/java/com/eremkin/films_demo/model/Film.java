@@ -1,0 +1,51 @@
+package com.eremkin.films_demo.model;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Film {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    private String director;
+
+    @Column(name = "release_year")
+    private Integer releaseYear;
+
+    @Column(length = 2000)
+    private String description;
+
+    public Film() {
+    }
+
+    public Film(String title, String director, Integer releaseYear, String description) {
+        this.title = title;
+        this.director = director;
+        this.releaseYear = releaseYear;
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}

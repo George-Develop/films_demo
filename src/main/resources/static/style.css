@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #0f172a;
+    color: #f1f5f9;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.header {
+    padding: 60px 0 30px 0;
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+.logo {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #94a3b8;
+}
+
+/* Catalog */
+
+.catalog {
+    margin: 60px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Card */
+
+.film-card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.film-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 22px;
+}
+
+.year {
+    background: #2563eb;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.director {
+    margin-top: 15px;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.description {
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #94a3b8;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    background: #0f172a;
+    color: #64748b;
+    font-size: 14px;
+}

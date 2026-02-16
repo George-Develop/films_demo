@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Films Catalog</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1 class="logo">🎬 Films Catalog</h1>
+        <p class="subtitle">Рандомные фильмы</p>
+    </div>
+</header>
+
+<main class="container">
+    <div class="catalog">
+        <div class="film-card" th:each="film : ${films}">
+            <div class="card-header">
+                <h2 th:text="${film.title}">Title</h2>
+                <span class="year" th:text="${film.releaseYear}">2024</span>
+            </div>
+
+            <div class="card-body">
+                <p class="director">
+                    Режиссёр:
+                    <span th:text="${film.director}">Director</span>
+                </p>
+
+                <p class="description"
+                   th:text="${film.description}">
+                    Description
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2026 Eremkin Films Demo</p>
+</footer>
+
+</body>
+</html>
