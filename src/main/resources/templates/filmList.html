@@ -18,14 +18,35 @@
 
     <div class="catalog">
         <div class="film-card" th:each="film : ${films}">
-            <div class="card-header">
-                <h2 th:text="${film.title}">Title</h2>
-                <span class="year" th:text="${film.releaseYear}">2024</span>
-            </div>
-
             <div class="card-body">
-                <p class="director">Режиссёр: <span th:text="${film.director}">Director</span></p>
-                <p class="description" th:text="${film.description}">Description</p>
+                <h3>Информация о фильме</h3>
+                <form th:action="@{/films/update}" method="post" class="edit-film-form">
+
+                    <input type="hidden" name="id" th:value="${film.id}">
+
+                    <input type="text" name="title"
+                           th:value="${film.title}"
+                           th:attr="data-original=${film.title}"
+                           required>
+
+                    <input type="text" name="director"
+                           th:value="${film.director}"
+                           th:attr="data-original=${film.director}"
+                           required>
+
+                    <input type="number" name="year"
+                           th:value="${film.releaseYear}"
+                           th:attr="data-original=${film.releaseYear}"
+                           required>
+
+                    <textarea name="description"
+                              th:text="${film.description}"
+                              th:attr="data-original=${film.description}"></textarea>
+
+                    <button type="submit" class="btn-primary hidden">Сохранить</button>
+                </form>
+
+                <hr>
 
                 <h4>Актеры:</h4>
                 <ul class="actor-list">
@@ -38,21 +59,11 @@
                     </li>
                 </ul>
 
-                <div class="add-actor-block">
-                    <form th:action="@{/films/addActor}" method="post" class="form-inline">
-                        <input type="hidden" name="filmId" th:value="${film.id}">
-                        <select name="actorId" required>
-                            <option th:each="actor : ${actors}" th:value="${actor.id}" th:text="${actor.name}"></option>
-                        </select>
-                        <input name="roleName" placeholder="Роль" required>
-                        <button class="btn-primary" type="submit">Добавить актёра</button>
-                    </form>
-                </div>
-
                 <form th:action="@{/films/delete}" method="post" style="margin-top:10px;">
                     <input type="hidden" name="id" th:value="${film.id}">
                     <button class="btn-danger" type="submit">Удалить фильм</button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -61,6 +72,7 @@
     <div class="film-card">
         <h2>Добавить фильм</h2>
         <form th:action="@{/films/add}" method="post" id="filmForm">
+
             <input name="title" placeholder="Название" required><br>
             <input name="director" placeholder="Режиссёр" required><br>
             <input name="year" type="number" placeholder="Год выпуска" required><br>
@@ -137,6 +149,36 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("addActorBtn").addEventListener("click", addActorRow);
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelectorAll(".edit-film-form").forEach(form => {
+
+            const inputs = form.querySelectorAll("input[name='title'], input[name='director'], input[name='year'], textarea[name='description']");
+            const saveBtn = form.querySelector(".btn-primary");
+
+            function checkChanges() {
+                let changed = false;
+
+                inputs.forEach(input => {
+                    if (input.value !== input.dataset.original) {
+                        changed = true;
+                    }
+                });
+
+                if (changed) {
+                    saveBtn.classList.remove("hidden");
+                } else {
+                    saveBtn.classList.add("hidden");
+                }
+            }
+
+            inputs.forEach(input => {
+                input.addEventListener("input", checkChanges);
+            });
+
+        });
+
     });
     /*]]>*/
 </script>
