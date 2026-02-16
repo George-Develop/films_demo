@@ -2,6 +2,9 @@ package com.eremkin.films_demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Film {
 
@@ -18,6 +21,10 @@ public class Film {
 
     @Column(length = 2000)
     private String description;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FilmActor> filmActors = new HashSet<>();
+
 
     public Film() {
     }
@@ -46,6 +53,14 @@ public class Film {
 
     public String getDescription() {
         return description;
+    }
+
+    public Set<FilmActor> getFilmActors() {
+        return filmActors;
+    }
+
+    public void setFilmActors(Set<FilmActor> filmActors) {
+        this.filmActors = filmActors;
     }
 
     public void setTitle(String title) {
