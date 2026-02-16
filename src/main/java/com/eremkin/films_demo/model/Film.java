@@ -28,7 +28,6 @@ public class Film {
         this.releaseYear = releaseYear;
         this.description = description;
     }
-
     public Long getId() {
         return id;
     }
@@ -47,5 +46,21 @@ public class Film {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
