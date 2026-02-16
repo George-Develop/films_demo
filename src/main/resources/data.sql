@@ -24,19 +24,19 @@ CREATE TABLE film_actor
 );
 
 INSERT INTO film (title, director, release_year, description) VALUES
-                                                                  ('Inception', 'Christopher Nolan', 2010, 'A thief who steals corporate secrets through dream-sharing technology.'),
-                                                                  ('The Matrix', 'Lana Wachowski, Lilly Wachowski', 1999, 'A hacker discovers the world is a simulation.'),
-                                                                  ('Interstellar', 'Christopher Nolan', 2014, 'A team travels through a wormhole in space.');
+('Inception', 'Christopher Nolan', 2010, 'A thief who steals corporate secrets through dream-sharing technology.'),
+('The Matrix', 'Lana Wachowski, Lilly Wachowski', 1999, 'A hacker discovers the world is a simulation.'),
+('Interstellar', 'Christopher Nolan', 2014, 'A team travels through a wormhole in space.');
 
 INSERT INTO actor (name) VALUES
-                             ('Leonardo DiCaprio'),
-                             ('Joseph Gordon-Levitt'),
-                             ('Ellen Page'),
-                             ('Keanu Reeves'),
-                             ('Laurence Fishburne'),
-                             ('Carrie-Anne Moss'),
-                             ('Matthew McConaughey'),
-                             ('Anne Hathaway');
+('Leonardo DiCaprio'),
+('Joseph Gordon-Levitt'),
+('Ellen Page'),
+('Keanu Reeves'),
+('Laurence Fishburne'),
+('Carrie-Anne Moss'),
+('Matthew McConaughey'),
+('Anne Hathaway');
 
 INSERT INTO film_actor (film_id, actor_id, role_name) VALUES
 
