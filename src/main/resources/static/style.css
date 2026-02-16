@@ -98,3 +98,122 @@ body {
     color: #64748b;
     font-size: 14px;
 }
+/* Формы */
+.form-block input,
+.form-block textarea,
+.form-inline input,
+.form-inline select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.form-inline input,
+.form-inline select {
+    flex: 1 1 auto;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #1e40af;
+}
+
+.btn-danger {
+    background-color: #dc2626;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #991b1b;
+}
+
+.btn-small {
+    background-color: #475569;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    background-color: #334155;
+}
+
+/* Список актеров в фильме */
+.actor-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.actor-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0;
+}
+
+.actor-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.actor-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.actor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+.actor-table th, .actor-table td {
+    border: 1px solid #64748b;
+    padding: 8px;
+    text-align: left;
+}
+.actor-table th {
+    background-color: #1e293b;
+}
+.btn-small {
+    padding: 3px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+}
+.btn-small:hover {
+    background-color: #1e40af;
+}
+.add-actor-block {
+    border: 2px solid #38bdf8; /* голубая обводка */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background-color: rgba(56, 189, 248, 0.1); /* прозрачный фон */
+}

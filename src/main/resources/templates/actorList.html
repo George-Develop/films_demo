@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actors Management</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <style>
+        .btn-primary.hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1 class="logo">🎬 Films Catalog</h1>
+        <p class="subtitle">Редактирование актеров</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="film-card">
+        <h2>Добавить актера</h2>
+        <form th:action="@{/actors/add}" method="post" class="form-inline">
+            <input name="name" placeholder="Имя актера" required>
+            <button type="submit" class="btn-primary">Добавить</button>
+        </form>
+    </div>
+
+    <div class="catalog">
+        <div class="film-card" th:each="actor : ${actors}">
+            <div class="card-body">
+                <form th:action="@{/actors/update}" method="post" class="form-inline">
+                    <input type="hidden" name="id" th:value="${actor.id}">
+                    <input type="text" name="name" th:value="${actor.name}"
+                           data-original-value="${actor.name}" required>
+                    <button type="submit" class="btn-primary hidden">Сохранить</button>
+                    <button type="submit" formaction="#" th:formaction="@{/actors/delete}"
+                            class="btn-danger" name="id" th:value="${actor.id}">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin: 40px 0;">
+        <a th:href="@{/}" class="btn-primary">Просмотр фильмов</a>
+        <a th:href="@{/films}" class="btn-primary">Редактирование фильмов</a>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>© 2026 Eremkin Films Demo</p>
+</footer>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".catalog input[name='name']").forEach(input => {
+            const saveBtn = input.closest("form").querySelector(".btn-primary");
+            input.addEventListener("input", () => {
+                if (input.value !== input.dataset.originalValue) {
+                    saveBtn.classList.remove("hidden");
+                } else {
+                    saveBtn.classList.add("hidden");
+                }
+            });
+        });
+    });
+    /*]]>*/
+</script>
+
+</body>
+</html>

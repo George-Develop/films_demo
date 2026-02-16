@@ -1,9 +1,13 @@
 package com.eremkin.films_demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "film_actor")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class FilmActor {
 
     @Id
@@ -12,6 +16,7 @@ public class FilmActor {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id")
+    @JsonBackReference
     private Film film;
 
     @ManyToOne(fetch = FetchType.LAZY)

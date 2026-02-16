@@ -15,6 +15,7 @@
 </header>
 
 <main class="container">
+
     <div class="catalog">
         <div class="film-card" th:each="film : ${films}">
             <div class="card-header">
@@ -23,18 +24,23 @@
             </div>
 
             <div class="card-body">
-                <p class="director">
-                    Режиссёр:
-                    <span th:text="${film.director}">Director</span>
-                </p>
+                <p class="director">Режиссёр: <span th:text="${film.director}">Director</span></p>
+                <p class="description" th:text="${film.description}">Description</p>
 
-                <p class="description"
-                   th:text="${film.description}">
-                    Description
-                </p>
+                <h4>Актеры:</h4>
+                <ul class="actor-list">
+                    <li th:each="fa : ${film.filmActors}">
+                        <span th:text="${fa.actor.name} + ' — ' + ${fa.roleName}"></span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+    <div style="text-align:center; margin: 40px 0;">
+        <a th:href="@{/films}" class="btn-primary">Управление фильмами</a>
+        <a th:href="@{/actors}" class="btn-primary">Управление актерами</a>
+    </div>
+
 </main>
 
 <footer class="footer">

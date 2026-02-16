@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Films Catalog</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1 class="logo">🎬 Films Catalog</h1>
+        <p class="subtitle">Редактирование фильмов</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="catalog">
+        <div class="film-card" th:each="film : ${films}">
+            <div class="card-header">
+                <h2 th:text="${film.title}">Title</h2>
+                <span class="year" th:text="${film.releaseYear}">2024</span>
+            </div>
+
+            <div class="card-body">
+                <p class="director">Режиссёр: <span th:text="${film.director}">Director</span></p>
+                <p class="description" th:text="${film.description}">Description</p>
+
+                <h4>Актеры:</h4>
+                <ul class="actor-list">
+                    <li th:each="fa : ${film.filmActors}">
+                        <span th:text="${fa.actor.name} + ' — ' + ${fa.roleName}"></span>
+                        <form th:action="@{/films/removeActor}" method="post" style="display:inline">
+                            <input type="hidden" name="filmActorId" th:value="${fa.id}">
+                            <button class="btn-small" type="submit">Удалить</button>
+                        </form>
+                    </li>
+                </ul>
+
+                <div class="add-actor-block">
+                    <form th:action="@{/films/addActor}" method="post" class="form-inline">
+                        <input type="hidden" name="filmId" th:value="${film.id}">
+                        <select name="actorId" required>
+                            <option th:each="actor : ${actors}" th:value="${actor.id}" th:text="${actor.name}"></option>
+                        </select>
+                        <input name="roleName" placeholder="Роль" required>
+                        <button class="btn-primary" type="submit">Добавить актёра</button>
+                    </form>
+                </div>
+
+                <form th:action="@{/films/delete}" method="post" style="margin-top:10px;">
+                    <input type="hidden" name="id" th:value="${film.id}">
+                    <button class="btn-danger" type="submit">Удалить фильм</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="film-card">
+        <h2>Добавить фильм</h2>
+        <form th:action="@{/films/add}" method="post" id="filmForm">
+            <input name="title" placeholder="Название" required><br>
+            <input name="director" placeholder="Режиссёр" required><br>
+            <input name="year" type="number" placeholder="Год выпуска" required><br>
+            <textarea name="description" placeholder="Описание"></textarea><br>
+
+            <h3>Актеры фильма</h3>
+            <div id="newActorsContainer">
+
+            </div>
+            <button type="button" class="btn-small" id="addActorBtn">Добавить актера</button><br><br>
+
+            <button type="submit" class="btn-primary">Добавить фильм</button>
+        </form>
+    </div>
+
+    <div style="text-align:center; margin: 40px 0;">
+        <a th:href="@{/actors}" class="btn-primary">Управление актерами</a>
+        <a th:href="@{/}" class="btn-primary">Каталог фильмов</a>
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>© 2026 Eremkin Films Demo</p>
+</footer>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    window.actors = JSON.parse(/*[[${actorsJson}]]*/ '[]');
+    /*]]>*/
+    console.log(window.actors);
+    window.actors.forEach(a => console.log(a.name));
+    /*<![CDATA[*/
+
+    function addActorRow() {
+        const container = document.getElementById("newActorsContainer");
+
+        const actorBlock = document.createElement("div");
+        actorBlock.className = "add-actor-block";
+
+        const actorSelect = document.createElement("select");
+        actorSelect.name = "actorIds";
+        actorSelect.required = true;
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "--Выберите актера--";
+        actorSelect.appendChild(defaultOption);
+
+        window.actors.forEach(a => {
+            const opt = document.createElement("option");
+            opt.value = a.id;
+            opt.textContent = a.name;
+            actorSelect.appendChild(opt);
+        });
+
+        const roleInput = document.createElement("input");
+        roleInput.name = "roleNames";
+        roleInput.placeholder = "Роль";
+        roleInput.required = true;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "btn-small";
+        removeBtn.textContent = "Удалить";
+        removeBtn.onclick = () => actorBlock.remove();
+
+        actorBlock.appendChild(actorSelect);
+        actorBlock.appendChild(roleInput);
+        actorBlock.appendChild(removeBtn);
+
+        container.appendChild(actorBlock);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("addActorBtn").addEventListener("click", addActorRow);
+    });
+    /*]]>*/
+</script>
+
+</body>
+</html>
